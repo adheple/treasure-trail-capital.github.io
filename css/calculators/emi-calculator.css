@@ -1,0 +1,137 @@
+.calc-block {
+    /* display: block;
+    margin-left: 30px;
+    margin-right: 30px; */
+}
+
+.calc-container {
+    background: #ededed;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.input-group {
+    border-radius: 20px;
+    text-align: center;
+    background: #d5d5d5;
+    outline: none;
+    width: auto;
+}
+
+#loanAmountSpan,
+#interestRateSpan,
+#loanTenureSpan,
+#innerSymbols {
+    border-radius: 20px;
+    border: 0;
+    box-shadow: none;
+    background: #d5d5d5;
+    text-align: center;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.list-group-item {
+    font-weight: bold;
+    background: #ededed;
+}
+
+.calc-top {
+    margin: 10px;
+}
+
+.calc-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0865e7;
+}
+
+.emi-toggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.emi-toggle-switch {
+    font-size: 20px;
+}
+
+#emiDetails .title-div {
+    width: 50%;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+
+#emiDetails .title-div .title-heading {
+    float: left;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+
+#emiDetails .title-div .bi-caret-down {
+    float: right;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+/* .table {
+    width: 50%;
+    margin: 0 auto;
+} */
+
+/* table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: auto;
+    border: 1px solid #ddd;
+    display: none;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+} */
+
+.table {
+    margin: auto;
+    width: 50% !important;
+}
+
+.table th,
+td {
+    text-align: center;
+}
+
+#emiDetails .btn-div {
+    width: 50%;
+    margin: 0 auto;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+@media only screen and (max-width: 768px) {
+    .table {
+        width: 100% !important;
+    }
+
+    #emiDetails .title-div {
+        width: 100%;
+    }
+
+    #emiDetails .btn-div {
+        width: 100%;
+    }
+}

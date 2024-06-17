@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<script>
+
+$(document).ready(function(){
+    calculateSIP();
+    $('#investmentAmount').on('input', function() {
+  text = $('#investmentAmount').val();
+  $('#investmentAmountSpan').html(text);
+  calculateSIP();
+});
+$('#interestRate').on('input', function() {
+  text = $('#interestRate').val();
+  $('#interestRateSpan').html(text);
+  calculateSIP();
+});
+$('#investmentPeriod').on('input', function() {
+  text = $('#investmentPeriod').val();
+  $('#investmentPeriodSpan').html(text);
+  calculateSIP();
+});
+})
+
+function calculateSIP() {
+    var investmentAmount = parseFloat($('#investmentAmount').val());
+    var interestRate = parseFloat($('#interestRate').val());
+    var investmentPeriod = parseInt($('#investmentPeriod').val());
+    
+    var monthlyInterestRate = interestRate / 12 / 100;
+    var totalMonths = investmentPeriod * 12;
+    var investedAmount = investmentAmount * totalMonths;
+    var totalValue = 0;
+    for (var i = 0; i < totalMonths; i++) {
+        totalValue = (totalValue + investmentAmount) * (1 + monthlyInterestRate);
+    }
+    var estReturns = totalValue - investedAmount;
+    $('#investedAmount').html(Math.round(investedAmount));
+    $('#estReturns').html(Math.round(estReturns));
+    $('#totalValue').html(Math.round(totalValue));
+};
+</script>
+<body>
+
+<div class="container">
+    <form class="range-form">
+        <div class="form-group row">
+          <div class="col-md-9">
+            <label for="investmentAmount">Monthly Investment Amount</label>
+          <input type="range" min="500" max="100000" value="10000" step="500" class="form-control-range range-slider" id="investmentAmount">
+          </div>
+          <div class="col-md-3">
+            <span id="investmentAmountSpan">10000</span>
+            <span>₹</span>
+        </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-9">
+              <label for="interestRate">Annual Interest Rate (%)</label>
+            <input type="range" min="1" max="30" value="12" step="0.1" class="form-control-range range-slider" id="interestRate">
+            </div>
+            <div class="col-md-3">
+              <span id="interestRateSpan">12</span>
+              <span>%</span>
+          </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-9">
+                  <label for="investmentPeriod">Time Period</label>
+                <input type="range" min="1" max="30" value="10" step="1" class="form-control-range range-slider" id="investmentPeriod">
+                </div>
+                <div class="col-md-3">
+                  <span id="investmentPeriodSpan">10</span>
+                  <span>Yr</span>
+              </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="investedAmount">Invested Amount</label>
+                        <span id="investedAmount"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="estReturns">Est. Returns</label>
+                        <span id="estReturns"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="totalValue">Total Value</label>
+                        <span id="totalValue"></span>
+                    </div>
+                </div>
+      </form>
+      
+</div>
+
+</body>
+</html>

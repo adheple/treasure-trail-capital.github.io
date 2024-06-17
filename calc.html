@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<script>
+
+  $(document).ready(function () {
+    calculateSIP();
+    createChart();
+  })
+
+  function calculateSIP() {
+    var investmentAmount = parseFloat($('#investmentAmount').val());
+    var interestRate = parseFloat($('#interestRate').val());
+    var investmentPeriod = parseInt($('#investmentPeriod').val());
+
+    var monthlyInterestRate = interestRate / 12 / 100;
+    var totalMonths = investmentPeriod * 12;
+    var investedAmount = investmentAmount * totalMonths;
+    var totalValue = 0;
+    for (var i = 0; i < totalMonths; i++) {
+      totalValue = (totalValue + investmentAmount) * (1 + monthlyInterestRate);
+    }
+    var estReturns = totalValue - investedAmount;
+    $('#investedAmount').html(Math.round(investedAmount));
+    $('#estReturns').html(Math.round(estReturns));
+    $('#totalValue').html(Math.round(totalValue));
+    updateChart();
+  };
+
+  function createChart() {
+    var xValues = ["Invested Amount", "Est. Returns", "Total Value"];
+    var yValues = [$('#investedAmount').html(), $('#estReturns').html(), $('#totalValue').html()];
+    var barColors = [
+      "#b91d47",
+      "#00aba9",
+      "#2b5797"
+    ];
+
+    new Chart("myChart", {
+      type: "doughnut",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        title: {
+          display: true
+        }
+      }
+    });
+  }
+
+  function updateChart() {
+    Chart.helpers.each(Chart.instances, function (instance) {
+      if (instance.chart.canvas.id === "myChart") {
+        var updatedData = [$('#investedAmount').html(), $('#estReturns').html(), $('#totalValue').html()];
+        instance.chart.data.datasets[0].data = updatedData;
+        instance.chart.update();
+      }
+    });
+  }
+</script>
+<style>
+  .container {
+    background: #ededed;
+    border-radius: 30px;
+    padding: 10px;
+  
+    
+  }
+
+  .input-group {
+    border-radius: 20px;
+    text-align: center;
+    background: #d5d5d5;
+    outline: none;
+    width: auto;
+  }
+
+  #investmentAmountSpan,
+  #interestRateSpan,
+  #investmentPeriodSpan,
+  #innerSymbols {
+    border: 0;
+    box-shadow: none;
+    background: #d5d5d5;
+    text-align: center;
+  }
+
+  .form-label {
+    font-weight: bold;
+  }
+  .list-group-item {
+    font-weight: bold;
+    background: #ededed;
+  }
+</style>
+
+<body>
+
+  <div class="container mx-2 mt-5">
+    
+  <div class="">
+    <div class="row">
+      
+
+      <div class="col-12 col-md-6 mt-md-5">
+        <div class="container range-group ">
+          <div class="">
+            <div class="row">
+              <div class="col-6">
+               <label for="investmentAmount" class="form-label ">Monthly Investment Amount</label>
+              </div>
+               <div class="col-6">
+                 <div class="input-group  ">
+                   <input type="text" class="form-control" value="10000" id="investmentAmountSpan"
+                     oninput="investmentAmount.value=investmentAmountSpan.value; calculateSIP();">
+                   <span class="input-group-text" id="innerSymbols">₹</span>
+                 </div>
+               </div>
+             </div>
+             <div class="">
+               <input type="range" min="500" max="100000" value="10000" step="500" class="form-control-range w-100 range-slider"
+                 id="investmentAmount" oninput="investmentAmountSpan.value=investmentAmount.value; calculateSIP();">
+             </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="interestRate" class="form-label">Annual Interest Rate</label>
+            </div>
+            <div class="col-6">
+              <div class="input-group">
+                <input type="text" class="form-control" value="12" id="interestRateSpan"
+                  oninput="interestRate.value=interestRateSpan.value; calculateSIP();">
+                <span class="input-group-text" id="innerSymbols">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <input type="range" min="1" max="30" value="12" step="0.1" class="form-control-range range-slider w-100"
+              id="interestRate" oninput="interestRateSpan.value=interestRate.value; calculateSIP();">
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="investmentPeriod" class="form-label">Time Period</label>
+            </div>
+            <div class="col-6">
+              <div class="input-group">
+                <input type="text" class="form-control" value="10" id="investmentPeriodSpan"
+                  oninput="investmentPeriod.value=investmentPeriodSpan.value; calculateSIP();">
+                <span class="input-group-text" id="innerSymbols">Yr</span>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <input type="range" min="1" max="30" value="10" step="1" class="form-control-range range-slider w-100"
+              id="investmentPeriod" oninput="investmentPeriodSpan.value=investmentPeriod.value; calculateSIP();">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 col-md-6">
+        
+        <div class="chart ">
+          <canvas id="myChart" class="col"></canvas>
+          <div class="list-items">
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item border-start-0 border-end-0 col">Invested Amount</li>
+              <li class="list-group-item border-start-0 border-end-0 col" id="investedAmount"></li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item border-start-0 border-end-0 col">Est. Returns</li>
+              <li class="list-group-item border-start-0 border-end-0 col" id="estReturns"></li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item border-start-0 border-end-0 col">Total Value</li>
+              <li class="list-group-item border-start-0 border-end-0 col" id="totalValue"></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

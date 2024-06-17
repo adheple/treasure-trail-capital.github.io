@@ -1,0 +1,44 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+
+footer {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footer-div a {
+    text-decoration: none;
+}
+
+
+.footer-div {
+    background-color: rgb(10, 10, 10);
+    width: 100%;
+}
+
+
+.footer-a {
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-input {
+    border: none;
+    border: 1px solid white;
+    background-color: transparent;
+    padding: 6px;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+}
+
+.copyright-sec {
+    background-color: black;
+    width: 100%;
+    height: 50PX;
+}

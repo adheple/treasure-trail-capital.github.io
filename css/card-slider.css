@@ -1,0 +1,93 @@
+.slide-container{
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1120px;
+    width: 100%;
+    margin: 40px;
+}
+.slide-content{
+    margin: 40px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+.card {
+    border-radius: 25px;
+    background-color: #fff;
+}
+.image-content,
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+    height: 20vh;
+}
+/* .image-content {
+    position: relative;
+    row-gap: 5px;
+}
+.overlay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #4070F4;
+    border-radius: 25px 25px 0 25px;
+}
+.card-image {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 3px;
+} */
+
+.card-img {
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+}
+.service-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #707070;
+}
+.service-description {
+    font-size: 14px;
+    color: #707070;
+    text-align: center;
+}
+.our-service-name{
+    font-size: 30px;
+    font-weight: 700;
+    color: #54b32a;
+    text-align: center;
+}
+/* .swiper-navBtn {
+    color: #6E93f7;
+    transition: color 0.3 ease;
+}
+.swiper-navBtn:hover {
+    color: #4070F4;
+}
+.swiper-navBtn::before,
+.swiper-navBtn::after {
+    font-size: 40px;
+}
+.swiper-button-next{
+    right: 0;
+}
+.swiper-button-prev{
+    left: 0;
+}
+.swiper-pagination-bullet{
+    background-color: #6E93f7;
+    opacity: 1;
+}
+.swiper-pagination-bullet-active{
+    background-color: #4070F4;
+} */

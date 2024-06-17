@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<script>
+
+$(document).ready(function(){
+    calculateSIP();
+    $('#investmentAmount').on('input', function() {
+  text = $('#investmentAmount').val();
+  $('#investmentAmountSpan').val(text);
+  calculateSIP();
+});
+$('#interestRate').on('input', function() {
+  text = $('#interestRate').val();
+  $('#interestRateSpan').val(text);
+  calculateSIP();
+});
+$('#investmentPeriod').on('input', function() {
+  text = $('#investmentPeriod').val();
+  $('#investmentPeriodSpan').val(text);
+  calculateSIP();
+});
+})
+
+function calculateSIP() {
+    var investmentAmount = parseFloat($('#investmentAmount').val());
+    var interestRate = parseFloat($('#interestRate').val());
+    var investmentPeriod = parseInt($('#investmentPeriod').val());
+    
+    var monthlyInterestRate = interestRate / 12 / 100;
+    var totalMonths = investmentPeriod * 12;
+    var investedAmount = investmentAmount * totalMonths;
+    var totalValue = 0;
+    for (var i = 0; i < totalMonths; i++) {
+        totalValue = (totalValue + investmentAmount) * (1 + monthlyInterestRate);
+    }
+    var estReturns = totalValue - investedAmount;
+    $('#investedAmount').html(Math.round(investedAmount));
+    $('#estReturns').html(Math.round(estReturns));
+    $('#totalValue').html(Math.round(totalValue));
+};
+</script>
+<style>
+.input-group {
+  border-radius: 20px;
+  text-align: center;
+  background: #d5d5d5;
+  outline: none;
+  width: auto;
+}
+#investmentAmountSpan, #interestRateSpan,#investmentPeriodSpan, #innerSymbols{
+  border: 0;
+  box-shadow: none;
+  background: #d5d5d5;
+  text-align: center;
+}
+.form-label {
+  font-weight: bold;
+}
+</style>
+<body>
+
+<div class="container">
+    <div class="row">
+      <div class="range-group col-lg-6">
+        <div class="row" style="margin: 5px;">
+          <label for="investmentAmount" class="form-label col-lg-6">Monthly Investment Amount</label>
+          <div class="input-group col-lg-6">
+            <input type="text" class="form-control" value="10000" id="investmentAmountSpan">
+            <span class="input-group-text" id="innerSymbols" >₹</span>
+          </div>
+        </div>
+        <div class="row">
+          <input type="range" min="500" max="100000" value="10000" step="500" class="form-control-range range-slider" id="investmentAmount">
+        </div>
+        <div class="row" style="margin: 5px;">
+          <label for="interestRate" class="form-label col-lg-6">Annual Interest Rate</label>
+          <div class="input-group col-lg-6">
+            <input type="text" class="form-control" value="12" id="interestRateSpan">
+            <span class="input-group-text" id="innerSymbols" >%</span>
+          </div>
+        </div>
+        <div class="row">
+          <input type="range" min="1" max="30" value="12" step="0.1" class="form-control-range range-slider" id="interestRate">
+        </div>
+        <div class="row" style="margin: 5px;">
+          <label for="investmentPeriod" class="form-label col-lg-6">Time Period</label>
+          <div class="input-group col-lg-6">
+            <input type="text" class="form-control" value="10" id="investmentPeriodSpan">
+            <span class="input-group-text" id="innerSymbols" >Yr</span>
+          </div>
+        </div>
+        <div class="row">
+          <input type="range" min="1" max="30" value="10" step="1" class="form-control-range range-slider" id="investmentPeriod">
+        </div>
+      </div>
+
+      
+      <div class="graph col-lg-6">
+        
+        <div class="row">
+          <div class="d-inline">
+            <label for="investedAmount">Invested Amount</label>
+            <span id="investedAmount"></span>
+          </div>
+          <div class="d-inline">
+            <label for="estReturns">Est. Returns</label>
+            <span id="estReturns"></span>
+          </div>
+          <div class="d-inline">
+            <label for="totalValue">Total Value</label>
+            <span id="totalValue"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+</div>
+
+</body>
+</html>

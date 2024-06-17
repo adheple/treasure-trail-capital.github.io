@@ -1,0 +1,49 @@
+.calc-block {
+    /* display: block;
+    margin-left: 30px;
+    margin-right: 30px; */
+}
+
+.calc-container {
+    background: #ededed;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.input-group {
+    border-radius: 20px;
+    text-align: center;
+    background: #d5d5d5;
+    outline: none;
+    width: auto;
+}
+
+#goalAmountSpan,
+#interestRateSpan,
+#yearsToGoalSpan,
+#innerSymbols {
+    border-radius: 20px;
+    border: 0;
+    box-shadow: none;
+    background: #d5d5d5;
+    text-align: center;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.list-group-item {
+    font-weight: bold;
+    background: #ededed;
+}
+
+.calc-top {
+    margin: 10px;
+}
+
+.calc-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0865e7;
+}
