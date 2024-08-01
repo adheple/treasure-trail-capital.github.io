@@ -1,4 +1,4 @@
-var testimonialSwiper = new Swiper(".swiper", {
+var testimonialSwiper = new Swiper("#swiper-testimonial", {
     slidesPerView: 2,
     spaceBetween: 5,
     loop: true,
@@ -8,7 +8,7 @@ var testimonialSwiper = new Swiper(".swiper", {
         delay: 5000,
     },
     pagination: {
-        el: ".swiper-pagination",
+        el: "#swiper-pagination-testimonial",
         clickable: true,
         dynamicBullets: true
     },
